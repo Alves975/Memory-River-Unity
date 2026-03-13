@@ -25,6 +25,7 @@
 *.mdb
 *.opendb
 *.VC.db
+.vsconfig
 
 # Unity generated
 *.pidb.meta

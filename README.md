@@ -6,11 +6,9 @@ Projeto academico de um jogo da memoria com tema ambiental, desenvolvido em Unit
 
 ### Video de demonstracao
 
-O video de demonstracao foi mantido fora do repositorio porque o arquivo original ultrapassa o limite de 100 MB do GitHub.
+Link do video:
 
-Sugestao para publicacao:
-- subir o video em Google Drive, OneDrive ou YouTube;
-- depois substituir esta secao por um link publico.
+- YouTube: https://youtu.be/NdFcX2iyQd0
 
 Descricao:
 - video curto de demonstracao do fluxo principal do projeto;
