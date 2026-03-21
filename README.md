@@ -1,22 +1,21 @@
 # Memory River
 
-Projeto academico de um jogo da memoria com tema ambiental, desenvolvido em Unity. Este README foi escrito para servir como documentacao tecnica de handoff, ou seja, para permitir que outra pessoa continue o trabalho sem precisar descobrir a estrutura do projeto do zero.
+Projeto academico de um jogo da memoria com tema ambiental, desenvolvido em Unity. Este documento foi escrito como material de handoff tecnico, para que outra pessoa consiga entender a estrutura do projeto, testar o sistema e continuar a implementacao sem precisar descobrir tudo do zero.
 
 ## Midia do Projeto
 
 ### Video de demonstracao
 
-Link do video:
-
 - YouTube: https://youtu.be/NdFcX2iyQd0
 
-Descricao:
-- video curto de demonstracao do fluxo principal do projeto;
-- mostra navegacao entre menus e uma partida em andamento.
+O video mostra:
+- navegacao no menu principal;
+- fluxo do modo historia;
+- fluxo de criar sala e entrar em sala;
+- partida online em funcionamento;
+- tela final de vitoria e derrota.
 
 ### Galeria de telas
-
-As figuras abaixo documentam as telas principais do sistema e servem como referencia visual para continuidade do projeto.
 
 #### Figura 1. Menu principal
 
@@ -65,7 +64,7 @@ Legenda:
 
 Legenda:
 - tela principal da partida;
-- mostra o tabuleiro, os personagens laterais e o estado do jogo durante a rodada.
+- mostra o tabuleiro, o HUD de pontos e o estado da sala durante a rodada.
 
 #### Figura 7. Tela de vitoria
 
@@ -81,25 +80,35 @@ Legenda:
 
 Legenda:
 - resultado exibido ao jogador derrotado;
-- apresenta diferenca de pontuacao e opcoes de continuar ou voltar.
+- apresenta a diferenca de pontuacao e opcoes de continuar ou voltar.
 
 ## 1. Visao Geral
 
-O jogo possui dois fluxos principais:
+O projeto possui dois fluxos principais:
 
 - `Modo Historia`: experiencia local com menu de campanha.
-- `Modo Online`: criacao e entrada em partidas usando Unity Relay + Netcode for GameObjects.
+- `Modo Online`: criacao e entrada em sala, seguida de uma partida sincronizada entre dois jogadores.
 
-No gameplay, o jogador precisa memorizar cartas, formar pares e acumular pontos. No modo online, o host controla o estado da partida e sincroniza as jogadas entre os dois jogadores.
+O jogo usa uma arquitetura hibrida:
+
+- `TCP`: gerenciamento de sala e sessao da partida.
+- `Unity Relay + Unity Transport + Netcode for GameObjects`: gameplay em tempo real.
+
+Isso significa que:
+
+- o TCP cuida do lobby;
+- o Relay/Netcode cuida da partida em si;
+- cartas, turnos, pontuacao e fim de jogo continuam no stack nativo da Unity.
 
 ## 2. Objetivo do Projeto
 
-O objetivo deste projeto e unir:
+O objetivo do projeto e unir:
 
 - mecanica de jogo da memoria;
-- tema educativo/ecologico;
-- menus estruturados para campanha e multiplayer;
-- sincronizacao online entre dois jogadores.
+- tema ambiental/educativo;
+- menus separados para campanha e online;
+- multiplayer para dois jogadores;
+- base documentada para expansao futura.
 
 ## 3. Tecnologias Utilizadas
 
@@ -109,7 +118,10 @@ O objetivo deste projeto e unir:
 - `Unity Transport 1.3.4`
 - `Unity Services Authentication 2.0.0`
 - `Unity Services Relay 1.0.2`
+- `Unity Services Core 1.14.0`
 - `TextMeshPro`
+- `TCP` com mensagens JSON simples
+- `Servidor TCP em C# console`
 
 ## 4. Estrutura Geral do Projeto
 
@@ -117,29 +129,33 @@ Principais pastas:
 
 - `Assets/Scenes`: cenas do jogo
 - `Assets/Scripts`: scripts principais de gameplay e menus
+- `Assets/Scripts/TcpLobby`: cliente TCP e modelos do lobby
 - `Assets/Editor`: scripts utilitarios para gerar e corrigir cenas
+- `TcpServer`: servidor TCP do lobby
 - `Assets/Media`, `Assets/Objects`, `Assets/Resources`, `Assets/Som`: artes, prefabs, sprites e audio
+- `docs/media`: imagens e video referenciados no README
 
 ## 5. Cenas do Projeto
 
-As cenas principais registradas no projeto sao:
-
 ### `MainMenu.unity`
+
 Cena inicial do jogo. Possui as opcoes:
 
-- Modo Historia
-- Criar Partida
-- Encontrar Partida
-- Sair
+- `Modo Historia`
+- `Criar Partida`
+- `Encontrar Partida`
+- `Sair`
 
 ### `StoryMenu.unity`
+
 Cena intermediaria da campanha. Hoje o fluxo esta preparado para o `Capitulo 1`.
 
 ### `Level3_Multiplayer.unity`
+
 Cena principal de gameplay. Apesar do nome antigo, ela e usada tanto para:
 
-- modo historia/local
-- modo online
+- modo historia/local;
+- modo online.
 
 ## 6. Fluxo de Navegacao
 
@@ -149,13 +165,106 @@ Cena principal de gameplay. Apesar do nome antigo, ela e usada tanto para:
 
 ### Fluxo online
 
-`MainMenu -> Criar Partida / Encontrar Partida -> Level3_Multiplayer`
+`MainMenu -> Criar Partida / Encontrar Partida -> Sala TCP valida -> Relay -> Level3_Multiplayer`
 
-## 7. Explicacao de Cada Classe
+## 7. Arquitetura do Online
+
+### 7.1 Lobby TCP
+
+O lobby usa um servidor TCP separado para:
+
+- criar sala;
+- entrar em sala;
+- manter host e guest;
+- marcar jogadores como prontos;
+- avisar quando ambos estao prontos;
+- repassar o `relayJoinCode` do host para o segundo jogador;
+- tratar saida da sala.
+
+### 7.2 Gameplay com Relay/Netcode
+
+Depois que a sala TCP fica valida:
+
+1. o host cria a sessao Relay;
+2. o host recebe um `join code`;
+3. esse codigo e enviado ao guest pelo TCP;
+4. os dois entram na cena da partida;
+5. a logica do tabuleiro continua no `RelayMatchController`.
+
+Importante:
+
+- o TCP nao sincroniza cartas;
+- o TCP nao controla turnos;
+- o TCP nao substitui o Netcode;
+- o TCP e apenas a camada de sala/sessao.
+
+### 7.3 Como o TCP foi usado neste projeto
+
+Neste projeto, o TCP foi adicionado como uma camada separada do gameplay principal. A ideia foi nao alterar a arquitetura da partida que ja funcionava com os servicos da Unity.
+
+Na pratica, o TCP ficou responsavel apenas por:
+
+- conectar o cliente Unity a um servidor por `IP + porta`;
+- criar a sala;
+- gerar e armazenar o codigo da sala;
+- permitir que outro jogador entre por esse codigo;
+- manter o estado da sala em memoria no servidor;
+- marcar host e guest;
+- controlar se cada jogador esta pronto ou nao;
+- avisar quando ambos estiverem prontos;
+- liberar o inicio da partida;
+- repassar o `Relay Join Code` do host para o segundo jogador;
+- tratar saida e desconexao da sala.
+
+Ou seja, o TCP foi usado como um **modulo de lobby e sessao**.
+
+O TCP **nao** foi usado para:
+
+- sincronizar cartas;
+- sincronizar turnos;
+- sincronizar objetos da partida;
+- mover dados do tabuleiro em tempo real;
+- decidir vencedor durante o gameplay.
+
+Essas responsabilidades continuaram no stack principal da Unity:
+
+- `Unity Relay`
+- `Unity Transport`
+- `Netcode for GameObjects`
+- `RelayMatchController`
+
+#### Fluxo pratico do TCP no projeto
+
+O fluxo final ficou assim:
+
+1. O jogador abre o jogo.
+2. O cliente Unity conecta no servidor TCP.
+3. O host usa `Criar Partida`.
+4. O servidor TCP cria a sala e devolve um codigo.
+5. O segundo jogador usa `Encontrar Partida`.
+6. O servidor coloca os dois na mesma sala.
+7. Os dois podem marcar que estao prontos.
+8. Quando a sala fica valida, o host inicia o fluxo do Relay.
+9. O host cria a sessao no Relay.
+10. O host recebe o `join code` do Relay.
+11. Esse `join code` e enviado ao outro jogador pelo servidor TCP.
+12. A partir desse ponto, a partida continua no sistema online principal da Unity.
+
+#### Vantagem dessa decisao
+
+Essa separacao trouxe uma vantagem importante para o projeto academico:
+
+- o lobby ficou simples de entender e expandir;
+- a partida nao precisou ser reescrita;
+- o fluxo de sala ficou isolado;
+- quem continuar o projeto consegue mexer no lobby sem quebrar o gameplay online.
+
+## 8. Explicacao de Cada Classe
 
 Esta e a parte mais importante para continuidade do trabalho.
 
 ### `Assets/Scripts/Card.cs`
+
 Responsavel pelo comportamento individual de cada carta.
 
 Funcoes principais:
@@ -171,9 +280,11 @@ Funcoes principais:
 - aplicar estados visuais recebidos do modo online.
 
 Observacao:
-- A classe nao decide regras da partida. Ela so representa e anima uma carta.
+- a classe nao decide as regras da partida;
+- ela representa e anima uma carta.
 
 ### `Assets/MemoryCardButton.cs`
+
 Componente auxiliar ligado ao clique da carta.
 
 Funcao:
@@ -181,40 +292,36 @@ Funcao:
 - receber o clique do botao da carta;
 - chamar `GameManager.OnCardClicked(cardIndex)`.
 
-Em resumo:
-- esta classe faz a ponte entre a interface da carta e a logica do jogo.
-
 ### `Assets/Scripts/GameManager.cs`
-E o controlador principal do gameplay.
+
+Controlador principal do gameplay.
 
 Responsabilidades:
 
-- gerar cartas automaticamente a partir de um prefab;
+- gerar cartas automaticamente a partir de prefab;
 - montar o tabuleiro;
-- iniciar o preview das cartas no inicio da partida;
-- controlar cliques locais nas cartas;
-- comparar pares;
+- iniciar o preview inicial das cartas;
+- processar cliques locais;
+- comparar pares no modo local;
 - tocar sons;
 - esconder cartas acertadas;
-- controlar score/local HUD;
 - criar e atualizar elementos visuais do modo online;
-- aplicar snapshots sincronizados vindos do `RelayMatchController`.
+- aplicar snapshots sincronizados vindos do `RelayMatchController`;
+- exibir HUD de pontos, mensagens e tela final.
 
-Esta e a classe central do jogo durante a partida.
-
-Se alguem for continuar o projeto, esta e uma das primeiras classes que precisa estudar.
+Esta e a classe central da cena de jogo.
 
 ### `Assets/Scripts/RelayMatchController.cs`
-E a classe central do multiplayer online.
+
+Classe central do multiplayer da partida.
 
 Responsabilidades:
 
 - inicializar Unity Services;
-- autenticar jogador;
-- criar partida online;
-- entrar em partida online usando codigo;
-- configurar Relay e transport;
-- controlar o `NetworkManager`;
+- autenticar o jogador;
+- criar partida no Relay;
+- entrar em partida usando codigo do Relay;
+- configurar `NetworkManager` e `UnityTransport`;
 - manter o estado autoritativo do tabuleiro;
 - receber pedidos de jogada;
 - validar jogadas;
@@ -222,13 +329,87 @@ Responsabilidades:
 - calcular pontos;
 - calcular combo de acertos;
 - definir vencedor;
-- sincronizar estado da partida com os dois jogadores;
-- tratar rematch e retorno ao menu.
+- sincronizar estado da partida com os dois clientes;
+- tratar retorno ao menu e revanche.
 
 Resumo:
-- no online, essa classe funciona como a autoridade da partida.
+- no online, essa classe e a autoridade da partida.
+
+### `Assets/Scripts/TcpLobby/TcpLobbyClient.cs`
+
+Cliente TCP de baixo nivel no Unity.
+
+Responsabilidades:
+
+- conectar em um IP e porta;
+- enviar mensagens JSON para o servidor;
+- receber mensagens JSON do servidor;
+- expor eventos de conexao, desconexao, logs e mensagens recebidas.
+
+### `Assets/Scripts/TcpLobby/TcpLobbyManager.cs`
+
+Controlador de lobby TCP no Unity.
+
+Responsabilidades:
+
+- chamar criacao de sala;
+- chamar entrada em sala;
+- alternar estado de pronto;
+- receber atualizacoes da sala;
+- repassar status para a UI;
+- iniciar o fluxo do Relay quando ambos estiverem prontos.
+
+Em resumo:
+- essa classe faz a ponte entre o menu e o servidor TCP.
+
+### `Assets/Scripts/TcpLobby/LobbyMessage.cs`
+
+Modelo de mensagem JSON usado pelo cliente TCP.
+
+Funcoes:
+
+- representar os tipos de mensagem do lobby;
+- serializar e desserializar dados simples de sala.
+
+### `Assets/Scripts/TcpLobby/RoomState.cs`
+
+Modelo do estado da sala no cliente Unity.
+
+Armazena:
+
+- codigo da sala;
+- host;
+- guest;
+- status;
+- flags de pronto;
+- join code do Relay quando necessario.
+
+### `TcpServer/Program.cs`
+
+Servidor TCP em C# console.
+
+Responsabilidades:
+
+- abrir porta TCP;
+- aceitar conexoes;
+- criar salas;
+- permitir entrada por codigo;
+- marcar jogadores prontos;
+- manter o estado das salas em memoria;
+- enviar mensagens claras de sucesso e erro;
+- repassar `relayJoinCode` do host para o guest;
+- tratar desconexao e saida da sala.
+
+### `TcpServer/LobbyMessage.cs`
+
+Modelo de mensagem JSON usado pelo servidor.
+
+### `TcpServer/RoomState.cs`
+
+Modelo de estado de sala usado pelo servidor.
 
 ### `Assets/Scripts/GameLaunchConfig.cs`
+
 Classe estatica usada para carregar configuracoes de uma cena para outra.
 
 Armazena, por exemplo:
@@ -238,17 +419,14 @@ Armazena, por exemplo:
 - capitulo da campanha;
 - mensagens pendentes de status.
 
-E importante porque:
-- o menu define o contexto da partida;
-- a cena do gameplay le esse contexto depois.
-
 ### `Assets/Scripts/MainMenuController.cs`
+
 Controla o menu principal.
 
 Responsabilidades:
 
 - ligar botoes por nome;
-- abrir o painel principal;
+- abrir painel principal;
 - abrir painel de criar partida;
 - abrir painel de encontrar partida;
 - chamar criacao de sala;
@@ -256,9 +434,11 @@ Responsabilidades:
 - esconder e mostrar informacoes corretas;
 - garantir que o codigo da sala so apareca quando deve;
 - navegar para modo historia;
-- sair do jogo.
+- sair do jogo;
+- integrar com `TcpLobbyManager` quando o lobby TCP estiver ativo.
 
 ### `Assets/Scripts/StoryMenuController.cs`
+
 Controla o menu do modo historia.
 
 Responsabilidades:
@@ -268,6 +448,7 @@ Responsabilidades:
 - entrar na cena de gameplay em modo historia.
 
 ### `Assets/Scripts/SceneIds.cs`
+
 Classe simples de constantes.
 
 Serve para centralizar os nomes das cenas:
@@ -276,19 +457,18 @@ Serve para centralizar os nomes das cenas:
 - `StoryMenu`
 - `Gameplay`
 
-Vantagem:
-- evita erro por string escrita manualmente em varios scripts.
-
 ### `Assets/Scripts/MusicPlayer.cs`
+
 Controla a musica persistente entre cenas.
 
 Responsabilidade:
 
-- impedir que varias musicas sejam criadas ao trocar de cena;
-- manter uma instancia unica com `DontDestroyOnLoad`.
+- impedir varias instancias ao trocar de cena;
+- manter uma unica instancia com `DontDestroyOnLoad`.
 
 ### `Assets/Scripts/EducationalInfo.cs`
-Classe de apoio para textos educativos ou de feedback.
+
+Classe de apoio para mensagens educativas e feedback visual.
 
 Funcoes:
 
@@ -296,60 +476,36 @@ Funcoes:
 - mostrar mensagem de erro;
 - esconder mensagem.
 
-Pode ser expandida futuramente para reforcar o tema educativo do jogo.
-
 ### `Assets/Editor/MainMenuSceneBuilder.cs`
-Script de editor. Nao roda no build final do jogo.
+
+Script de editor.
 
 Responsabilidades:
 
 - gerar ou atualizar a cena `MainMenu.unity`;
 - montar layout base do menu;
 - aplicar estilo visual;
-- organizar botoes, paines e decoracao.
-
-Importante:
-- serve para reconstruir a cena do menu por codigo.
+- organizar botoes, paineis e decoracao.
 
 ### `Assets/Editor/StoryMenuSceneBuilder.cs`
-Semelhante ao `MainMenuSceneBuilder`, mas focado na cena `StoryMenu`.
+
+Script de editor da cena `StoryMenu`.
 
 Responsabilidades:
 
-- gerar/atualizar a cena `StoryMenu.unity`;
+- gerar ou atualizar a cena `StoryMenu.unity`;
 - construir o layout base do menu de campanha;
 - organizar paineis, textos e botoes.
 
 ### `Assets/Editor/MissingScriptCleaner.cs`
-Ferramenta de manutencao do projeto.
+
+Ferramenta de manutencao.
 
 Responsabilidades:
 
 - procurar scripts faltando em cenas e prefabs;
 - remover referencias quebradas;
 - evitar warnings desnecessarios no editor.
-
-Utilidade:
-- muito importante depois de migracoes de versao da Unity.
-
-## 8. Como o Online Funciona
-
-Resumo da arquitetura online:
-
-1. Um jogador cria a sala.
-2. O projeto gera um codigo de entrada.
-3. Outro jogador entra usando esse codigo.
-4. O host da partida controla:
-   - tabuleiro;
-   - turno;
-   - pontuacao;
-   - vencedor.
-5. Os clientes recebem o estado sincronizado.
-
-Isso significa que:
-
-- o modo online e autoritativo;
-- a logica principal nao depende de cada cliente localmente tomar decisoes isoladas.
 
 ## 9. Estado Atual do Projeto
 
@@ -359,57 +515,78 @@ No momento, o projeto possui:
 - menu de historia funcional;
 - gameplay local funcionando;
 - gameplay online implementado com Relay/Netcode;
+- lobby TCP implementado para criacao e entrada em sala;
 - sistema de pontos;
 - sistema de combo de acertos;
 - tela final com resultado da partida;
-- animacoes de carta.
+- animacoes de carta;
+- README com midia e documentacao de handoff.
 
-## 10. O que Outra Pessoa Precisa Saber Para Continuar
+## 10. Testes Realizados
 
-Se outra pessoa for continuar o trabalho, a recomendacao e seguir esta ordem:
+O projeto foi testado nos seguintes cenarios:
 
-1. estudar `GameManager.cs`
-2. estudar `RelayMatchController.cs`
-3. estudar `MainMenuController.cs` e `StoryMenuController.cs`
-4. revisar as cenas em `Assets/Scenes`
-5. revisar os builders de menu em `Assets/Editor`
-
-### Pontos naturais para evolucao
-
-- melhorar HUD do gameplay;
-- melhorar feedback visual de pontos e combos;
-- adicionar mais capitulos no modo historia;
-- adicionar mais conteudo educativo;
-- refinar telas de vitoria/derrota;
-- organizar melhor prefabs e assets visuais;
-- revisar nomes antigos, como `Level3_Multiplayer`.
+- abertura e navegacao do `MainMenu`;
+- navegacao `MainMenu -> StoryMenu -> Level3_Multiplayer`;
+- criacao de sala online;
+- entrada do segundo jogador por codigo;
+- inicio de partida online entre dois jogadores;
+- sincronizacao de cartas, turnos e pontuacao;
+- exibicao correta de tela de vitoria e derrota;
+- build Android e execucao em aparelho Android;
+- execucao local no editor Unity 2022.
 
 ## 11. Como Abrir e Executar
 
 ### Requisitos
 
 - Unity `2022.3.62f3`
+- .NET SDK no computador caso seja necessario rodar o `TcpServer`
 
-### Passos
+### Abrir no editor
 
 1. Abrir o projeto no Unity Hub.
 2. Abrir a cena `Assets/Scenes/MainMenu.unity`.
 3. Apertar `Play`.
 
-### Para testar o online
+### Rodar o servidor TCP
 
-1. Abrir dois clientes:
-   - Unity Editor + build
-   - ou dois builds
-2. No cliente 1:
+No terminal:
+
+```powershell
+cd "TcpServer"
+dotnet run
+```
+
+Se quiser alterar a porta:
+
+```powershell
+dotnet run -- 7777
+```
+
+### Testar o online
+
+1. Iniciar o servidor TCP.
+2. Abrir dois clientes:
+   - Unity Editor + build;
+   - ou dois builds.
+3. No cliente 1:
    - `Criar Partida`
    - `Criar Sala`
-3. No cliente 2:
+4. No cliente 2:
    - `Encontrar Partida`
    - digitar o codigo gerado
-4. Os dois devem entrar na cena de gameplay.
+5. Os dois entram na sala.
+6. Quando o fluxo de Relay for iniciado, os dois vao para `Level3_Multiplayer`.
 
-### Possivel erro ao abrir o build
+### Testar no Android
+
+1. Selecionar plataforma Android no `Build Settings`.
+2. Marcar arquitetura `ARM64`.
+3. Gerar o `.apk`.
+4. Instalar no dispositivo Android ou usar `Build And Run`.
+
+## 12. Possivel Erro no Build Windows
 
 Se o executavel mostrar erro relacionado a `VCRUNTIME140.dll`, o computador provavelmente esta sem o runtime do Visual C++ necessario para executar o build.
 
@@ -418,13 +595,37 @@ Solucao:
 1. Instalar o `Microsoft Visual C++ Redistributable` mais recente.
 2. Abrir o jogo novamente.
 
-## 12. Observacoes Importantes
+## 13. O Que Outra Pessoa Precisa Saber Para Continuar
 
-- O projeto passou por migracao de Unity antiga para Unity 2022.
+Se outra pessoa for continuar o trabalho, a recomendacao e seguir esta ordem:
+
+1. estudar `GameManager.cs`;
+2. estudar `RelayMatchController.cs`;
+3. estudar `TcpLobbyManager.cs` e `TcpLobbyClient.cs`;
+4. estudar `MainMenuController.cs` e `StoryMenuController.cs`;
+5. revisar as cenas em `Assets/Scenes`;
+6. revisar os builders de menu em `Assets/Editor`;
+7. revisar o servidor em `TcpServer`.
+
+### Pontos naturais para evolucao
+
+- melhorar o HUD do gameplay;
+- melhorar feedback visual de pontos e combos;
+- adicionar mais capitulos no modo historia;
+- adicionar mais conteudo educativo;
+- refinar ainda mais as telas de vitoria/derrota;
+- organizar melhor prefabs e assets visuais;
+- revisar nomes antigos, como `Level3_Multiplayer`.
+
+## 14. Observacoes Importantes
+
+- O projeto passou por migracao de uma versao antiga da Unity para `Unity 2022`.
+- O multiplayer da partida continua usando o stack da Unity.
+- O lobby TCP e complementar e nao substitui o Relay/Netcode.
 - Existem nomes antigos em algumas cenas e estruturas, mas o fluxo principal atual esta funcional.
-- O README foi escrito com foco em continuidade academica, nao em publicacao comercial.
+- Este README foi escrito com foco academico e de continuidade tecnica.
 
-## 13. Resumo Final
+## 15. Resumo Final
 
 Este projeto ja entrega:
 
@@ -432,11 +633,13 @@ Este projeto ja entrega:
 - gameplay de jogo da memoria;
 - campanha inicial;
 - multiplayer online;
+- lobby TCP para sala;
 - sincronizacao de estado da partida;
 - base para expansao futura.
 
 Para uma continuacao segura do trabalho:
 
-- manter `GameManager` e `RelayMatchController` como referencias centrais;
+- manter `GameManager` e `RelayMatchController` como referencias centrais do gameplay;
+- manter `TcpLobbyManager` e `TcpServer` como referencias centrais do lobby;
 - documentar novas mudancas conforme forem sendo feitas;
-- evitar duplicar logica entre modo historia e modo online.
+- evitar duplicar logica entre modo historia, lobby e gameplay online.

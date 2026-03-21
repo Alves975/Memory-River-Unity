@@ -18,12 +18,17 @@ public class MainMenuController : MonoBehaviour
 
     private string _currentRoomCode = "";
     private RelayMatchController _relayController;
+    public bool useTcpLobby = false;
+    public TcpLobby.TcpLobbyManager tcpLobbyManager;
 
     private void Awake()
     {
         _relayController = RelayMatchController.EnsureInstance();
         _relayController.RoomCodeChanged += HandleRoomCodeChanged;
         _relayController.StatusChanged += HandleStatusChanged;
+
+        if (tcpLobbyManager == null)
+            tcpLobbyManager = FindObjectOfType<TcpLobby.TcpLobbyManager>();
 
         BindUI();
         ResetTransientUI();
@@ -63,6 +68,12 @@ public class MainMenuController : MonoBehaviour
 
     public async void ConfirmCreateMatch()
     {
+        if (useTcpLobby && tcpLobbyManager != null)
+        {
+            tcpLobbyManager.CreateRoom();
+            return;
+        }
+
         if (_relayController == null || _relayController.IsBusy)
             return;
 
@@ -90,6 +101,12 @@ public class MainMenuController : MonoBehaviour
 
     public async void ConfirmJoinMatch()
     {
+        if (useTcpLobby && tcpLobbyManager != null)
+        {
+            tcpLobbyManager.JoinRoom();
+            return;
+        }
+
         if (_relayController == null || _relayController.IsBusy)
             return;
 
@@ -108,6 +125,9 @@ public class MainMenuController : MonoBehaviour
     {
         if (_relayController != null)
             _relayController.CancelPendingSessionInMenu();
+
+        if (useTcpLobby && tcpLobbyManager != null)
+            tcpLobbyManager.LeaveRoom();
 
         ResetTransientUI();
         ShowOnly(mainPanel);
