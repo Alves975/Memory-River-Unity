@@ -164,6 +164,8 @@ public class Card : MonoBehaviour
         if (delay > 0f)
             yield return new WaitForSeconds(delay);
 
+        if (this == null || gameObject == null) yield break;
+
         _isAnimating = true;
         float elapsed = 0f;
         Vector3 startScale = new Vector3(appearStartScale, appearStartScale, 1f);
@@ -171,11 +173,15 @@ public class Card : MonoBehaviour
 
         while (elapsed < appearDuration)
         {
+            if (this == null || gameObject == null) yield break;
+
             elapsed += Time.deltaTime;
             float progress = Mathf.Clamp01(elapsed / appearDuration);
             float eased = EaseOutBack(progress);
+
             transform.localScale = Vector3.LerpUnclamped(startScale, endScale, eased);
             SetAlpha(progress);
+
             yield return null;
         }
 
@@ -401,5 +407,10 @@ public class Card : MonoBehaviour
         const float c3 = c1 + 1f;
         float p = t - 1f;
         return 1f + c3 * p * p * p + c1 * p * p;
+    }
+
+     private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class StoryMenuController : MonoBehaviour
 {
-    public string gameplaySceneName = SceneIds.Gameplay;
+    public string gameplaySceneName = SceneIds.Level1;
     public string mainMenuSceneName = SceneIds.MainMenu;
 
     public Text chapterTitleText;
@@ -21,7 +21,7 @@ public class StoryMenuController : MonoBehaviour
     public void StartChapterOne()
     {
         GameLaunchConfig.ConfigureStory(1);
-        SceneManager.LoadScene(gameplaySceneName);
+        SceneManager.LoadScene("Level1_Multiplayer");
     }
 
     public void BackToMainMenu()

@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level3_Multiplayer.unity
     guid: 91a494eca5d569f46b12cf5b742b6e96
+  - enabled: 1
+    path: Assets/Scenes/Level1_Multiplayer.unity
+    guid: 8d07b0d632545a646a007ebafa744561
+  - enabled: 1
+    path: Assets/Scenes/Level2_Multiplayer.unity
+    guid: 2240867517b78a141812a782e2faf54d
+  - enabled: 1
+    path: Assets/Scenes/DialogueScene.unity
+    guid: c263441927bf35f4aa84c02ca284c771
   m_configObjects: {}

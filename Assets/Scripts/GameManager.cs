@@ -1,9 +1,14 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+[ExecuteAlways]
 public class GameManager : MonoBehaviour
 {
     [Header("Cards Generation")]
@@ -19,6 +24,10 @@ public class GameManager : MonoBehaviour
     public float appearStaggerSeconds = 0.04f;
     public float matchedDisappearDelaySeconds = 0.45f;
     public float matchedDisappearDurationSeconds = 0.22f;
+
+    [Header("Editor Preview")]
+    public bool editorPreview = false;
+    public bool autoRefreshPreview = true;
 
     public EducationalInfo educationalInfo;
 
@@ -55,8 +64,90 @@ public class GameManager : MonoBehaviour
     public AudioClip backgroundMusic;
     private AudioSource musicSource;
 
-    private void Start()
+    private void OnValidate()
     {
+#if UNITY_EDITOR
+        if (!editorPreview) return;
+        if (Application.isPlaying) return;
+
+        if (autoRefreshPreview)
+        {
+            GenerateEditorPreview();
+        }
+#endif
+    }
+
+#if UNITY_EDITOR
+    [ContextMenu("Generate Editor Preview")]
+    public void GenerateEditorPreview()
+    {
+        if (cardsContainer == null || cardPrefab == null)
+            return;
+
+        ClearEditorPreview();
+        EnsureCardsEditor();
+    }
+
+    private void ClearEditorPreview()
+    {
+        if (cardsContainer == null) return;
+
+        for (int i = cardsContainer.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(cardsContainer.GetChild(i).gameObject);
+        }
+    }
+
+    private void EnsureCardsEditor()
+    {
+        cards = new GameObject[generatedCardsCount];
+
+        RectTransform containerRect = cardsContainer as RectTransform;
+
+        int rows = Mathf.CeilToInt((float)generatedCardsCount / Mathf.Max(1, columns));
+        float width = (columns * cellSize.x) + ((columns - 1) * spacing.x);
+        float height = (rows * cellSize.y) + ((rows - 1) * spacing.y);
+
+        if (containerRect != null)
+        {
+            containerRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+            containerRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+        }
+
+        for (int i = 0; i < generatedCardsCount; i++)
+        {
+            GameObject cardObj = (GameObject)PrefabUtility.InstantiatePrefab(cardPrefab);
+            cardObj.transform.SetParent(cardsContainer);
+            cardObj.name = "Card_" + i;
+
+            cards[i] = cardObj;
+
+            RectTransform cardRect = cardObj.GetComponent<RectTransform>();
+            if (cardRect != null)
+            {
+                int row = i / Mathf.Max(1, columns);
+                int column = i % Mathf.Max(1, columns);
+
+                cardRect.anchoredPosition = new Vector2(
+                    column * (cellSize.x + spacing.x),
+                    -row * (cellSize.y + spacing.y)
+                );
+            }
+        }
+    }
+#endif
+
+ private void Start()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (sceneName == "Fase1")
+            generatedCardsCount = 8;
+        else if (sceneName == "Fase2")
+            generatedCardsCount = 12;
+        else if (sceneName == "Fase3")
+            generatedCardsCount = 16;
+
         _onlineMode = GameLaunchConfig.IsOnlineMode && RelayMatchController.Instance.SessionRunning;
         Card.DO_NOT = _onlineMode;
 
@@ -70,10 +161,12 @@ public class GameManager : MonoBehaviour
         musicSource.clip = backgroundMusic;
         musicSource.loop = true;
         musicSource.volume = 0.2f;
+
         if (backgroundMusic != null)
             musicSource.Play();
 
         _matches = 0;
+
         if (matchText != null)
             matchText.text = "Acertos: 0";
 
@@ -97,6 +190,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
     public void OnCardClicked(int index)
     {
         if (_onlineMode)
@@ -157,7 +251,16 @@ public class GameManager : MonoBehaviour
             cellSize = new Vector2(99.225f, 104.7375f);
 
         for (int i = cardsContainer.childCount - 1; i >= 0; i--)
-            Destroy(cardsContainer.GetChild(i).gameObject);
+            {
+            #if UNITY_EDITOR
+                if (!Application.isPlaying)
+                    DestroyImmediate(cardsContainer.GetChild(i).gameObject);
+                else
+                    Destroy(cardsContainer.GetChild(i).gameObject);
+            #else
+                Destroy(cardsContainer.GetChild(i).gameObject);
+            #endif
+            }
 
         RectTransform containerRect = cardsContainer as RectTransform;
         if (containerRect != null)
@@ -192,10 +295,13 @@ public class GameManager : MonoBehaviour
                 cardRect.pivot = new Vector2(0f, 1f);
                 cardRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, cellSize.x);
                 cardRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, cellSize.y);
-                cardRect.anchoredPosition = new Vector2(
-                    column * (cellSize.x + spacing.x),
-                    -row * (cellSize.y + spacing.y)
-                );
+               float totalWidth = (columns * cellSize.x) + ((columns - 1) * spacing.x);
+               float totalHeight = (Mathf.CeilToInt((float)generatedCardsCount / columns) * cellSize.y);
+
+               cardRect.anchoredPosition = new Vector2(
+        column * (cellSize.x + spacing.x),
+        -row * (cellSize.y + spacing.y)
+    );
                 cardRect.localScale = Vector3.one;
             }
 
