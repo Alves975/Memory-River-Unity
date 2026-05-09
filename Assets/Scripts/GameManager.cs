@@ -137,20 +137,27 @@ public class GameManager : MonoBehaviour
     }
 #endif
 
- private void Start()
+    private void Start()
     {
         string sceneName = SceneManager.GetActiveScene().name;
 
         if (sceneName == "Fase1")
+        {
             generatedCardsCount = 8;
+            columns = 2;
+        }
         else if (sceneName == "Fase2")
+        {
             generatedCardsCount = 12;
+            columns = 3;
+        }
         else if (sceneName == "Fase3")
+        {
             generatedCardsCount = 16;
+            columns = 4;
+        }
 
-        _onlineMode = GameLaunchConfig.IsOnlineMode && RelayMatchController.Instance.SessionRunning;
-        Card.DO_NOT = _onlineMode;
-
+     _onlineMode = GameLaunchConfig.IsOnlineMode && RelayMatchController.Instance.SessionRunning;
         EnsureCardsAreReady();
 
         audioSource = GetComponent<AudioSource>();
