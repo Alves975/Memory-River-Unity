@@ -683,16 +683,18 @@ public class GameManager : MonoBehaviour
 
     private void LoadNextScene(string currentScene)
     {
-        if (currentScene == SceneIds.Gameplay)
+        if (currentScene == SceneIds.Level1)
         {
-            if (GameLaunchConfig.CurrentMode == GameLaunchMode.Story)
-                SceneManager.LoadScene(SceneIds.StoryMenu);
-            else
-                SceneManager.LoadScene(SceneIds.MainMenu);
-            return;
+            SceneManager.LoadScene(SceneIds.Level2);
         }
-
-        Debug.Log("Fim do jogo. Nenhuma próxima fase configurada.");
+        else if (currentScene == SceneIds.Level2)
+        {
+            SceneManager.LoadScene(SceneIds.Level3);
+        }
+        else if (currentScene == SceneIds.Level3)
+        {
+            SceneManager.LoadScene(SceneIds.MainMenu);
+        }
     }
 
     private void UpdateLaunchModeText()

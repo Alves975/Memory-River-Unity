@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level2_Multiplayer.unity
     guid: 2240867517b78a141812a782e2faf54d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DialogueScene.unity
     guid: c263441927bf35f4aa84c02ca284c771
   m_configObjects: {}
