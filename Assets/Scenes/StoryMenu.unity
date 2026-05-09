@@ -97,7 +97,12 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
+<<<<<<< HEAD
   m_LightingSettings: {fileID: 696981370}
+=======
+  m_LightingSettings: {fileID: 4890085278179872738, guid: a288a75861f3b854695f2a4880eb3f1a,
+    type: 2}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -122,6 +127,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &19825346
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +286,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125138078}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &156898955
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,9 +411,14 @@ MonoBehaviour:
   mainMenuSceneName: MainMenu
   chapterTitleText: {fileID: 1481485850}
   chapterDescriptionText: {fileID: 2132230157}
+<<<<<<< HEAD
   progressText: {fileID: 2025361924}
   statusText: {fileID: 19825348}
   phaseConfig: {fileID: 11400000, guid: 2d6c95e99b9146945af914b6fe9cefad, type: 2}
+=======
+  progressText: {fileID: 0}
+  statusText: {fileID: 0}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &314358828
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,8 +453,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08, y: 0.04}
   m_AnchorMax: {x: 0.92, y: 0.17}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
+=======
+  m_AnchoredPosition: {x: -8.2561035, y: 15.499634}
+  m_SizeDelta: {x: -16.512, y: 30.9992}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &314358830
 MonoBehaviour:
@@ -476,7 +494,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
+<<<<<<< HEAD
   m_Text: A campanha usa a mesma base do tabuleiro e evolui por capitulos.
+=======
+  m_Text: "\u2022 Vire duas cartas por vez\n\u2022 Acerte os pares para limpar o
+    rio\n\u2022 Se errar, vire as cartas de volta\n\u2022 Encontre todos os pares
+    e deixe o rio limpo! \U0001F4A7"
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!222 &314358831
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -524,7 +548,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.2}
   m_AnchorMax: {x: 0.9, y: 0.78}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: 0}
+=======
+  m_AnchoredPosition: {x: 0, y: 42}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &324380174
@@ -629,8 +657,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.54}
   m_AnchorMax: {x: 1, y: 1}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: -8}
   m_SizeDelta: {x: -48, y: -16}
+=======
+  m_AnchoredPosition: {x: -124, y: -41}
+  m_SizeDelta: {x: -304.5121, y: 16.8336}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &503855918
 MonoBehaviour:
@@ -654,10 +687,17 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
     m_FontSize: 30
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
+=======
+    m_FontSize: 35
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 3
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -708,7 +748,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: -46}
+=======
+  m_AnchoredPosition: {x: 0, y: -50}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_SizeDelta: {x: 440, y: 70}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &527379989
@@ -744,7 +788,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
+<<<<<<< HEAD
   m_Text: Campanha
+=======
+  m_Text: Como Jogar
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!222 &527379990
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -828,6 +876,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597181692}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!850595691 &696981370
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1050,6 +1099,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039841666}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &1058789691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1135,7 @@ RectTransform:
   m_Children:
   - {fileID: 1344005801}
   - {fileID: 2064617383}
+<<<<<<< HEAD
   - {fileID: 1039841667}
   - {fileID: 1481485852}
   - {fileID: 2132230159}
@@ -1091,11 +1143,21 @@ RectTransform:
   - {fileID: 1249239612}
   - {fileID: 1619262738}
   - {fileID: 19825347}
+=======
+  - {fileID: 1481485852}
+  - {fileID: 2132230159}
+  - {fileID: 1249239612}
+  - {fileID: 1619262738}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Father: {fileID: 169083414}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.04, y: 0.08}
   m_AnchorMax: {x: 0.47, y: 0.92}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: 0}
+=======
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058789693
@@ -1141,7 +1203,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
+<<<<<<< HEAD
   m_Color: {r: 0.9098039, g: 0.8156863, b: 0.6431373, a: 1}
+=======
+  m_Color: {r: 0.79622644, g: 0.6928319, b: 0.5032752, a: 1}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1279,7 +1345,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 503855917}
+<<<<<<< HEAD
   - {fileID: 125138079}
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Father: {fileID: 1058789692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -1332,12 +1401,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 169083415}
+<<<<<<< HEAD
         m_TargetAssemblyTypeName: StoryMenuController, Assembly-CSharp
         m_MethodName: StartSelectedPhase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+=======
+        m_TargetAssemblyTypeName: 
+        m_MethodName: StartChapterOne
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1442,9 +1520,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
+<<<<<<< HEAD
   m_Children:
   - {fileID: 2092053470}
   - {fileID: 1413855315}
+=======
+  m_Children: []
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Father: {fileID: 324380173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.12, y: 0.2}
@@ -1502,7 +1584,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
   m_Sprite: {fileID: 0}
+=======
+  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1554,8 +1640,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08, y: 0.08}
   m_AnchorMax: {x: 0.92, y: 0.9}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
+=======
+  m_AnchoredPosition: {x: 0, y: 18.079102}
+  m_SizeDelta: {x: 0, y: 36.1582}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1344005802
 MonoBehaviour:
@@ -1595,6 +1686,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344005800}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!1 &1413855314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,6 +1766,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413855314}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &1447230472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,9 +1799,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
+<<<<<<< HEAD
   m_Children:
   - {fileID: 1786889187}
   - {fileID: 1024868792}
+=======
+  m_Children: []
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Father: {fileID: 324380173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.38, y: 0.2}
@@ -1765,7 +1863,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
   m_Sprite: {fileID: 0}
+=======
+  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1859,6 +1961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 60, y: -210}
   m_SizeDelta: {x: 500, y: 58}
   m_Pivot: {x: 0, y: 1}
@@ -1997,6 +2100,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  m_AnchoredPosition: {x: 60, y: -243}
+  m_SizeDelta: {x: 500, y: 58}
+  m_Pivot: {x: 0, y: 1}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &1619262737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,10 +2330,17 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
     m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
+=======
+    m_FontSize: 25
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
     m_MaxSize: 40
     m_Alignment: 6
     m_AlignByGeometry: 0
@@ -2375,9 +2490,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
+<<<<<<< HEAD
   m_Children:
   - {fileID: 1603342701}
   - {fileID: 2086435678}
+=======
+  m_Children: []
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Father: {fileID: 324380173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.64, y: 0.2}
@@ -2435,7 +2554,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
   m_Sprite: {fileID: 0}
+=======
+  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2453,6 +2576,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747337967}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!1 &1786889186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2544,6 +2668,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786889186}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &1994716105
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,6 +2762,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &2025361923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2715,6 +2842,8 @@ RectTransform:
   m_AnchoredPosition: {x: 60, y: -392}
   m_SizeDelta: {x: 560, y: 36}
   m_Pivot: {x: 0, y: 1}
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &2064617382
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,7 +2878,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 60, y: -48}
+=======
+  m_AnchoredPosition: {x: 60, y: -90.72003}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_SizeDelta: {x: 560, y: 78}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2064617384
@@ -2794,6 +2927,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064617382}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
 --- !u!1 &2086435677
 GameObject:
   m_ObjectHideFlags: 0
@@ -2964,6 +3098,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092053469}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &2106223240
 GameObject:
   m_ObjectHideFlags: 0
@@ -3049,7 +3185,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
+<<<<<<< HEAD
   m_Color: {r: 0.9098039, g: 0.8156863, b: 0.6431373, a: 1}
+=======
+  m_Color: {r: 0.79622644, g: 0.6928319, b: 0.5032752, a: 1}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3125,7 +3265,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
+<<<<<<< HEAD
   m_Text: Memorize as cartas, limpe o tabuleiro e avance na campanha.
+=======
+  m_Text: Memorize as cartas, e ajude Julia a limpar o Rio.
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!222 &2132230158
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3150,7 +3294,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 60, y: -278}
+=======
+  m_AnchoredPosition: {x: 60, y: -329}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_SizeDelta: {x: 560, y: 96}
   m_Pivot: {x: 0, y: 1}
 --- !u!1660057539 &9223372036854775807
@@ -3160,4 +3308,7 @@ SceneRoots:
   - {fileID: 1994716108}
   - {fileID: 156898958}
   - {fileID: 1712319412}
+<<<<<<< HEAD
   - {fileID: 1611802793}
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb

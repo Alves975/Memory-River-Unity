@@ -419,6 +419,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -196}
   m_SizeDelta: {x: 620, y: 70}
   m_Pivot: {x: 0, y: 1}
+<<<<<<< HEAD
 --- !u!1 &233805054
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +499,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233805054}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &248070505
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +904,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381846920}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &408717523
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +949,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &410192923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,6 +1552,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594951796}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &633267251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,6 +1644,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633267251}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &782742708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,8 +1676,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 538062088}
+<<<<<<< HEAD
   - {fileID: 2072096721}
   - {fileID: 1307671177}
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   - {fileID: 1456152088}
   - {fileID: 1245386587}
   m_Father: {fileID: 1354712174}
@@ -1740,6 +1752,7 @@ RectTransform:
   m_AnchoredPosition: {x: 110, y: -270}
   m_SizeDelta: {x: 620, y: 520}
   m_Pivot: {x: 0, y: 1}
+<<<<<<< HEAD
 --- !u!1 &1036396544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,6 +1845,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &1039719020
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,6 +2819,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -196}
   m_SizeDelta: {x: 620, y: 70}
   m_Pivot: {x: 0, y: 1}
+<<<<<<< HEAD
 --- !u!1 &1235040928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2912,6 +2928,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235040928}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &1245386586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,16 +2961,25 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
+<<<<<<< HEAD
   m_Children:
   - {fileID: 1235040929}
   - {fileID: 1461273558}
   - {fileID: 2014579630}
+=======
+  m_Children: []
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Father: {fileID: 782742709}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.52, y: 0.08}
   m_AnchorMax: {x: 0.94, y: 0.92}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
+=======
+  m_AnchoredPosition: {x: 16.8806, y: 12.3129}
+  m_SizeDelta: {x: 163.4229, y: 105.2175}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1245386588
 MonoBehaviour:
@@ -2997,14 +3024,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
+<<<<<<< HEAD
   m_Color: {r: 0.9098039, g: 0.8156863, b: 0.6431373, a: 1}
+=======
+  m_Color: {r: 1, g: 0.9846837, b: 0.95660377, a: 1}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
   m_Sprite: {fileID: 0}
+=======
+  m_Sprite: {fileID: 21300000, guid: 10bfe03bc381bf74d9223a36cec3e223, type: 3}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3188,6 +3223,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287615621}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &1307671176
 GameObject:
   m_ObjectHideFlags: 0
@@ -3263,6 +3299,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307671176}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &1354712170
 GameObject:
   m_ObjectHideFlags: 0
@@ -3340,7 +3378,11 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+<<<<<<< HEAD
   m_AdditionalShaderChannelsFlag: 25
+=======
+  m_AdditionalShaderChannelsFlag: 0
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -3444,6 +3486,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377028539}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &1409797150
 GameObject:
   m_ObjectHideFlags: 0
@@ -3553,6 +3596,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409797150}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &1456152087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,7 +3687,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
+<<<<<<< HEAD
   m_Color: {r: 0.9098039, g: 0.8156863, b: 0.6431373, a: 1}
+=======
+  m_Color: {r: 0.79622644, g: 0.6928319, b: 0.5032752, a: 1}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3667,6 +3716,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456152087}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &1461273557
 GameObject:
   m_ObjectHideFlags: 0
@@ -3775,6 +3825,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461273557}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &1503204174
 GameObject:
   m_ObjectHideFlags: 0
@@ -4133,8 +4185,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08, y: 0.09}
   m_AnchorMax: {x: 0.92, y: 0.9}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
+=======
+  m_AnchoredPosition: {x: -0.000030517578, y: 39.17679}
+  m_SizeDelta: {x: -0.000061035, y: 78.3535}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1634162148
 MonoBehaviour:
@@ -5003,7 +5060,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
+<<<<<<< HEAD
   m_AnchoredPosition: {x: 110, y: -150}
+=======
+  m_AnchoredPosition: {x: 110, y: -158}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_SizeDelta: {x: 620, y: 80}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1931286427
@@ -5039,7 +5100,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
+<<<<<<< HEAD
   m_Text: Campanha separada e fluxo de sala preparado.
+=======
+  m_Text: "Nos ajude a despoluir o Rio Tiet\xEA"
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!222 &1931286428
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5048,6 +5113,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931286425}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &2014579629
 GameObject:
   m_ObjectHideFlags: 0
@@ -5127,6 +5193,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014579629}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &2044008480
 GameObject:
   m_ObjectHideFlags: 0
@@ -5206,6 +5274,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044008480}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &2072096720
 GameObject:
   m_ObjectHideFlags: 0
@@ -5360,6 +5429,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108670280}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!1 &2144627004
 GameObject:
   m_ObjectHideFlags: 0
@@ -5446,5 +5517,8 @@ SceneRoots:
   - {fileID: 516776744}
   - {fileID: 1749335765}
   - {fileID: 1354712174}
+<<<<<<< HEAD
   - {fileID: 408717525}
   - {fileID: 1036396546}
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb

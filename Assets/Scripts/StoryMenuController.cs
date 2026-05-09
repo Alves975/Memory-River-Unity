@@ -1,18 +1,29 @@
+<<<<<<< HEAD
 ﻿using UnityEngine;
+=======
+using UnityEngine;
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StoryMenuController : MonoBehaviour
 {
+<<<<<<< HEAD
     public string gameplaySceneName = SceneIds.Gameplay;
     public string mainMenuSceneName = SceneIds.MainMenu;
 
     [Header("Textos do menu")]
+=======
+    public string gameplaySceneName = SceneIds.Level1;
+    public string mainMenuSceneName = SceneIds.MainMenu;
+
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
     public Text chapterTitleText;
     public Text chapterDescriptionText;
     public Text progressText;
     public Text statusText;
 
+<<<<<<< HEAD
     [Header("Configuração das fases")]
     public PhaseConfig phaseConfig;
 
@@ -76,6 +87,18 @@ public class StoryMenuController : MonoBehaviour
         Debug.Log("[StoryMenu] Chamando SceneManager.LoadScene: " + gameplaySceneName);
         SceneManager.LoadScene(gameplaySceneName);
         Debug.Log("[StoryMenu] Após LoadScene — isso não deveria aparecer");
+=======
+    private void Awake()
+    {
+        BindUI();
+        RefreshTexts();
+    }
+
+    public void StartChapterOne()
+    {
+        GameLaunchConfig.ConfigureStory(1);
+        SceneManager.LoadScene("Level1_Multiplayer");
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
     }
 
     public void BackToMainMenu()
@@ -83,6 +106,7 @@ public class StoryMenuController : MonoBehaviour
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
+<<<<<<< HEAD
     // -------------------------------------------------------
     //  Atualiza os textos na tela conforme a fase selecionada
     // -------------------------------------------------------
@@ -139,6 +163,17 @@ public class StoryMenuController : MonoBehaviour
         }
 
         // Botão voltar
+=======
+    private void BindUI()
+    {
+        Button startButton = FindButton("Jogar Capitulo 1Button");
+        if (startButton != null)
+        {
+            startButton.onClick.RemoveAllListeners();
+            startButton.onClick.AddListener(StartChapterOne);
+        }
+
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
         Button backButton = FindButton("VoltarButton");
         if (backButton != null)
         {
@@ -146,6 +181,7 @@ public class StoryMenuController : MonoBehaviour
             backButton.onClick.AddListener(BackToMainMenu);
         }
 
+<<<<<<< HEAD
         // Botões de seleção de fase (se existirem)
         Button phase1Button = FindButton("Phase1Button");
         if (phase1Button != null) { phase1Button.onClick.RemoveAllListeners(); phase1Button.onClick.AddListener(() => SelectPhase(0)); }
@@ -161,6 +197,34 @@ public class StoryMenuController : MonoBehaviour
         if (chapterDescriptionText == null) chapterDescriptionText = FindText("ChapterDescription");
         if (progressText == null) progressText = FindText("Progress");
         if (statusText == null) statusText = FindText("Status");
+=======
+        if (chapterTitleText == null)
+            chapterTitleText = FindText("ChapterTitle");
+
+        if (chapterDescriptionText == null)
+            chapterDescriptionText = FindText("ChapterDescription");
+
+        if (progressText == null)
+            progressText = FindText("Progress");
+
+        if (statusText == null)
+            statusText = FindText("Status");
+    }
+
+    private void RefreshTexts()
+    {
+        if (chapterTitleText != null)
+            chapterTitleText.text = "Capitulo 1";
+
+        if (chapterDescriptionText != null)
+            chapterDescriptionText.text = "Memorize as cartas, limpe o tabuleiro e avance na campanha.";
+
+        if (progressText != null)
+            progressText.text = "Fluxo de historia separado do multiplayer.";
+
+        if (statusText != null)
+            statusText.text = "Comece pelo Capitulo 1.";
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
     }
 
     private Button FindButton(string objectName)
@@ -177,6 +241,7 @@ public class StoryMenuController : MonoBehaviour
 
     private Transform FindDeepChild(Transform parent, string objectName)
     {
+<<<<<<< HEAD
         if (parent.name == objectName) return parent;
         for (int i = 0; i < parent.childCount; i++)
         {
@@ -186,3 +251,18 @@ public class StoryMenuController : MonoBehaviour
         return null;
     }
 }
+=======
+        if (parent.name == objectName)
+            return parent;
+
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform found = FindDeepChild(parent.GetChild(i), objectName);
+            if (found != null)
+                return found;
+        }
+
+        return null;
+    }
+}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
