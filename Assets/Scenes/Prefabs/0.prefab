@@ -31,9 +31,15 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+<<<<<<< HEAD
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+=======
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -57,18 +63,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 429539099}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+=======
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+<<<<<<< HEAD
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 89a89f7008c09fb4aac058e7d5427b49, type: 3}
+=======
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77,7 +96,10 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+<<<<<<< HEAD
+=======
   m_PixelsPerUnitMultiplier: 1
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!114 &2777620731442913931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,12 +109,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 429539099}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+=======
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+<<<<<<< HEAD
+=======
     m_WrapAround: 0
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -102,20 +131,29 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+<<<<<<< HEAD
+=======
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+<<<<<<< HEAD
+=======
     m_SelectedSprite: {fileID: 0}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+<<<<<<< HEAD
+=======
     m_SelectedTrigger: Highlighted
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1981657594766970982}
@@ -123,7 +161,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 429539105}
+<<<<<<< HEAD
+=======
         m_TargetAssemblyTypeName: 
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
         m_MethodName: OnClickFlip
         m_Mode: 1
         m_Arguments:
@@ -134,6 +175,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+<<<<<<< HEAD
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+=======
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 --- !u!114 &429539105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +192,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f46b345593817c48af72dea71156232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  client: {fileID: 0}
+=======
   gameManager: {fileID: 0}
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
   cardIndex: 0
 --- !u!114 &429539101
 MonoBehaviour:
@@ -163,8 +213,11 @@ MonoBehaviour:
   _state: 0
   _cardValue: 0
   _initialized: 0
+<<<<<<< HEAD
+=======
   _matched: 0
   flipDuration: 0.18
   appearDuration: 0.2
   disappearDuration: 0.22
   appearStartScale: 0.75
+>>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
