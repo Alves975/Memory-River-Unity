@@ -592,18 +592,11 @@ public class RelayMatchController : MonoBehaviour
         _previewRunning = true;
 
         for (int i = 0; i < _boardStates.Length; i++)
-            _boardStates[i] = 0;
-
-        BroadcastSnapshot("Partida iniciada.");
-
-        yield return new WaitForSeconds(0.15f);
-
-        for (int i = 0; i < _boardStates.Length; i++)
             _boardStates[i] = 1;
 
         BroadcastSnapshot("Memorize as cartas.");
 
-        float delay = _gameManager != null ? Mathf.Max(1f, _gameManager.previewSeconds) : 1.4f;
+        float delay = _gameManager != null ? Mathf.Max(1f, _gameManager.previewSeconds) : 2f;
         yield return new WaitForSeconds(delay);
 
         for (int i = 0; i < _boardStates.Length; i++)

@@ -3065,7 +3065,7 @@ MonoBehaviour:
   launchModeText: {fileID: 0}
   successSound: {fileID: 8300000, guid: 605148639a98657468847a5caf1b8b76, type: 3}
   errorSound: {fileID: 8300000, guid: af85a2e67ebf1054a99594b0b68f3d3d, type: 3}
-  backgroundMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 14e9385f6fad42b41ba9cb949f804649, type: 3}
 --- !u!4 &1730462920
 Transform:
   m_ObjectHideFlags: 0

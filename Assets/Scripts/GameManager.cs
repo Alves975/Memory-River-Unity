@@ -20,6 +20,26 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    private const int OnlineCardsCount = 12;
+    private const int OnlineColumns = 6;
+    private static float _lastOnlineIntroStartRealtime = -100f;
+
+    private static readonly string[] OnlineOnlyHiddenSpriteNames =
+    {
+        "julia",
+        "sato",
+        "doutora",
+        "balao",
+        "balao2",
+        "progresso",
+        "barra",
+        "reserva",
+        "vaso",
+        "fundo1",
+        "fundo_principal",
+        "inicial"
+    };
+
     // -------------------------------------------------------
     //  SEÇÃO 1 — Campos originais (não alterados)
     // -------------------------------------------------------
@@ -54,6 +74,7 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip backgroundMusic;
     private AudioSource musicSource;
+    private AudioSource voiceSource;
 
     private bool _init = false;
     private int _matches = 0;
@@ -62,6 +83,7 @@ public class GameManager : MonoBehaviour
     private bool _onlineConfigured = false;
     private bool _onlineResultDisplayed = false;
     private string _lastScoreEventSignature = "";
+    private string _lastOnlineAudioFeedbackSignature = "";
     private GameObject _resultOverlay;
     private Text _resultTitleText;
     private Text _resultSubtitleText;
@@ -72,9 +94,29 @@ public class GameManager : MonoBehaviour
     private Text _resultBackButtonText;
     private Text _resultRematchButtonText;
     private GameObject _onlineHudRoot;
+    private GameObject _onlineBackgroundRoot;
+    private GameObject _onlineInfoPanel;
+    private RectTransform _onlineLightLayer;
+    private RectTransform _onlineMistLayer;
     private Text _scorePanelText;
     private Text _scorePopupText;
+    private Text _onlineRoomText;
+    private Text _onlinePasswordText;
+    private Text _onlinePlayerText;
+    private Text _onlineTurnText;
+    private Text _onlineStatusText;
+    private GameObject _onlineIntroOverlay;
+    private Text _onlineIntroText;
+    private AudioClip _introPartidaClip;
+    private AudioClip _introUmClip;
+    private AudioClip _introDoisClip;
+    private AudioClip _introTresClip;
+    private AudioClip _introVaiClip;
     private Coroutine _scorePopupRoutine;
+    private Coroutine _onlineIntroRoutine;
+    private bool _onlineIntroShown;
+    private bool _onlineIntroRunning;
+    private bool _lastOnlineCanPlay;
 
     // -------------------------------------------------------
     //  SEÇÃO 2 — Campos novos (adicionados para o GDD)
@@ -129,19 +171,13 @@ public class GameManager : MonoBehaviour
 
         // --- NOVO: aplica configuração da fase atual ---
         ApplyPhaseConfig();
+        ApplyOnlineBoardTuning();
 
         EnsureCardsAreReady();
 
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        musicSource = gameObject.AddComponent<AudioSource>();
-        musicSource.clip = backgroundMusic;
-        musicSource.loop = true;
-        musicSource.volume = 0.2f;
-        if (backgroundMusic != null)
-            musicSource.Play();
+        StopPersistentMenuMusic();
+        ConfigureAudioSources();
+        PlayBackgroundMusicOnce();
 
         _matches = 0;
         if (matchText != null)
@@ -231,6 +267,21 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Fase {_currentPhaseIndex} carregada: {_currentPhase.phaseName} | {generatedCardsCount} cartas | {_timeRemaining}s");
     }
 
+    private void ApplyOnlineBoardTuning()
+    {
+        if (!_onlineMode)
+            return;
+
+        generatedCardsCount = OnlineCardsCount;
+        columns = OnlineColumns;
+        _totalPairs = generatedCardsCount / 2;
+
+        cellSize = new Vector2(114f, 120f);
+        spacing = new Vector2(16f, 18f);
+        cardsScale = new Vector3(1.38f, 1.38f, 1f);
+        previewSeconds = 1.45f;
+    }
+
     // -------------------------------------------------------
     //  NOVO: Inicia o timer
     // -------------------------------------------------------
@@ -240,6 +291,74 @@ public class GameManager : MonoBehaviour
         UpdateTimerDisplay();
     }
 
+    private void StopPersistentMenuMusic()
+    {
+        MusicPlayer[] persistentMusicPlayers = FindObjectsOfType<MusicPlayer>();
+        foreach (MusicPlayer persistentMusic in persistentMusicPlayers)
+        {
+            if (persistentMusic == null)
+                continue;
+
+            AudioSource[] persistentSources = persistentMusic.GetComponents<AudioSource>();
+            foreach (AudioSource persistentSource in persistentSources)
+            {
+                if (persistentSource != null)
+                    persistentSource.Stop();
+            }
+        }
+    }
+
+    private void ConfigureAudioSources()
+    {
+        AudioSource[] existingSources = GetComponents<AudioSource>();
+
+        audioSource = existingSources.Length > 0 ? existingSources[0] : gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+        audioSource.volume = 0.42f;
+
+        voiceSource = existingSources.Length > 1 ? existingSources[1] : gameObject.AddComponent<AudioSource>();
+        voiceSource.playOnAwake = false;
+        voiceSource.loop = false;
+        voiceSource.volume = 0.68f;
+        voiceSource.pitch = 1.22f;
+
+        musicSource = existingSources.Length > 2 ? existingSources[2] : gameObject.AddComponent<AudioSource>();
+        musicSource.playOnAwake = false;
+        musicSource.loop = true;
+        musicSource.volume = 0.045f;
+
+        for (int i = 3; i < existingSources.Length; i++)
+        {
+            if (existingSources[i] == null)
+                continue;
+
+            existingSources[i].Stop();
+            existingSources[i].enabled = false;
+            existingSources[i].playOnAwake = false;
+        }
+    }
+
+    private void PlayBackgroundMusicOnce()
+    {
+        if (backgroundMusic == null || musicSource == null)
+            return;
+
+        AudioSource[] allSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource source in allSources)
+        {
+            if (source == null || source == musicSource)
+                continue;
+
+            if (source.clip == backgroundMusic && source.isPlaying)
+                source.Stop();
+        }
+
+        musicSource.clip = backgroundMusic;
+        if (!musicSource.isPlaying)
+            musicSource.Play();
+    }
+
     // -------------------------------------------------------
     //  Update — original + timer novo
     // -------------------------------------------------------
@@ -247,6 +366,9 @@ public class GameManager : MonoBehaviour
     {
         if (!_onlineMode && !_init && !_waitingForDialogue)
             InitializeCards();
+
+        if (_onlineMode)
+            AnimateOnlineBackground();
 
         // --- NOVO: atualiza o timer ---
         if (_timerRunning && !_onlineMode && _init && !_previewRunning)
@@ -360,7 +482,7 @@ public class GameManager : MonoBehaviour
                 matchText.text = "Acertos: " + _matches;
 
             if (audioSource != null && successSound != null)
-                audioSource.PlayOneShot(successSound);
+                audioSource.PlayOneShot(successSound, 0.45f);
 
             if (educationalInfo != null)
                 educationalInfo.ShowSuccessMessage();
@@ -381,7 +503,7 @@ public class GameManager : MonoBehaviour
         else
         {
             if (audioSource != null && errorSound != null)
-                audioSource.PlayOneShot(errorSound);
+                audioSource.PlayOneShot(errorSound, 0.45f);
 
             if (educationalInfo != null)
                 educationalInfo.ShowErrorMessage();
@@ -610,7 +732,13 @@ public class GameManager : MonoBehaviour
     public void ConfigureOnlineMode(bool resetVisuals = false)
     {
         _onlineMode = true;
+        ApplyOnlineBoardTuning();
+        HideCampaignPresentationForOnlineMode();
+
         EnsureCardsAreReady();
+        EnsureOnlineBackground();
+        EnsureOnlineInfoPanel();
+        EnsureOnlineIntroOverlay();
         EnsureResultOverlay();
         EnsureOnlineHud();
 
@@ -624,7 +752,11 @@ public class GameManager : MonoBehaviour
         _previewRunning = false;
         _matches = 0;
         _onlineResultDisplayed = false;
+        _onlineIntroShown = false;
+        _onlineIntroRunning = false;
+        _lastOnlineCanPlay = false;
         _lastScoreEventSignature = "";
+        _lastOnlineAudioFeedbackSignature = "";
         HideResultOverlay();
         ClearScorePopup();
 
@@ -633,6 +765,10 @@ public class GameManager : MonoBehaviour
 
         if (_scorePanelText != null)
             _scorePanelText.text = "Pontos: 0\nOponente: 0";
+
+        UpdateOnlineInfoPanel("Conectando...", -1, -1, true, false, false);
+        if (launchModeText != null)
+            launchModeText.gameObject.SetActive(false);
 
         if (cards == null)
             return;
@@ -657,6 +793,63 @@ public class GameManager : MonoBehaviour
         UpdateLaunchModeText();
     }
 
+    private void HideCampaignPresentationForOnlineMode()
+    {
+        HideCampaignImagesForOnlineMode();
+        HideCampaignSpritesForOnlineMode();
+
+        if (educationalPanel != null)
+            educationalPanel.SetActive(false);
+
+        if (mudOverlay != null)
+        {
+            Color color = mudOverlay.color;
+            color.a = 0f;
+            mudOverlay.color = color;
+        }
+    }
+
+    private void HideCampaignImagesForOnlineMode()
+    {
+        Image[] images = FindObjectsOfType<Image>(true);
+        foreach (Image image in images)
+        {
+            if (image == null || image.sprite == null)
+                continue;
+
+            if (ShouldHideInOnlineMode(image.sprite.name))
+                image.gameObject.SetActive(false);
+        }
+    }
+
+    private void HideCampaignSpritesForOnlineMode()
+    {
+        SpriteRenderer[] spriteRenderers = FindObjectsOfType<SpriteRenderer>(true);
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+        {
+            if (spriteRenderer == null || spriteRenderer.sprite == null)
+                continue;
+
+            if (ShouldHideInOnlineMode(spriteRenderer.sprite.name) || ShouldHideInOnlineMode(spriteRenderer.gameObject.name))
+                spriteRenderer.gameObject.SetActive(false);
+        }
+    }
+
+    private bool ShouldHideInOnlineMode(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return false;
+
+        string normalized = value.ToLowerInvariant();
+        foreach (string hiddenName in OnlineOnlyHiddenSpriteNames)
+        {
+            if (normalized.Contains(hiddenName))
+                return true;
+        }
+
+        return false;
+    }
+
     public void ApplyOnlineSnapshot(
         int[] cardValues,
         int[] cardStates,
@@ -674,6 +867,10 @@ public class GameManager : MonoBehaviour
         string statusMessage)
     {
         _onlineMode = true;
+        ApplyOnlineBoardTuning();
+        EnsureOnlineBackground();
+        EnsureOnlineInfoPanel();
+        EnsureOnlineIntroOverlay();
         EnsureCardsAreReady();
         _init = true;
         _previewRunning = previewRunning;
@@ -700,7 +897,8 @@ public class GameManager : MonoBehaviour
         }
 
         bool localCanPlay = !waitingForOpponent && !previewRunning && !gameOver && localPlayerSlot >= 0 && currentTurnSlot == localPlayerSlot;
-        Card.DO_NOT = !localCanPlay;
+        _lastOnlineCanPlay = localCanPlay;
+        Card.DO_NOT = _onlineIntroRunning || !localCanPlay;
 
         if (matchText != null)
         {
@@ -713,6 +911,9 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateScorePanel(scorePlayerOne, scorePlayerTwo, localPlayerSlot);
+        UpdateOnlineInfoPanel(statusMessage, localPlayerSlot, currentTurnSlot, waitingForOpponent, previewRunning, gameOver);
+        TryStartOnlineIntro(statusMessage, waitingForOpponent, previewRunning, gameOver);
+        HandleOnlineAudioFeedback(statusMessage, scorePlayerOne, scorePlayerTwo, currentTurnSlot, previewRunning, gameOver);
         HandleOnlineScorePopup(scorePlayerOne, scorePlayerTwo, localPlayerSlot, lastScoreEventSlot, lastPointsEarned, lastComboValue);
 
         if (launchModeText == null)
@@ -727,6 +928,7 @@ public class GameManager : MonoBehaviour
                 currentTurnSlot == localPlayerSlot ? "Sua vez" : "Vez do oponente";
 
             launchModeText.text = "Sala: " + GameLaunchConfig.RoomCode + "  |  " + localPlayerText + "\n" + turnText + "\n" + statusMessage;
+            launchModeText.gameObject.SetActive(false);
         }
 
         if (gameOver)
@@ -923,6 +1125,12 @@ public class GameManager : MonoBehaviour
         if (launchModeText == null)
             return;
 
+        if (_onlineMode)
+        {
+            launchModeText.gameObject.SetActive(false);
+            return;
+        }
+
         switch (GameLaunchConfig.CurrentMode)
         {
             case GameLaunchMode.CreateMatch:
@@ -964,6 +1172,383 @@ public class GameManager : MonoBehaviour
         text.color = new Color(0.98f, 0.96f, 0.85f);
         text.supportRichText = false;
         return text;
+    }
+
+    private void EnsureOnlineBackground()
+    {
+        if (_onlineBackgroundRoot != null)
+            return;
+
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas == null)
+            return;
+
+        _onlineBackgroundRoot = new GameObject("OnlineForestBackground", typeof(RectTransform), typeof(Image));
+        _onlineBackgroundRoot.transform.SetParent(canvas.transform, false);
+
+        RectTransform rect = _onlineBackgroundRoot.GetComponent<RectTransform>();
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+
+        Image image = _onlineBackgroundRoot.GetComponent<Image>();
+        image.sprite = CreateOnlineForestSprite();
+        image.type = Image.Type.Simple;
+        image.preserveAspect = false;
+        image.raycastTarget = false;
+
+        _onlineMistLayer = CreateOnlineBackgroundLayer(
+            _onlineBackgroundRoot.transform,
+            "OnlineForestMist",
+            CreateSoftBandSprite(new Color(0.72f, 0.90f, 0.70f, 0.10f), new Color(1f, 1f, 1f, 0f)),
+            new Color(1f, 1f, 1f, 0.42f),
+            new Vector2(2200f, 980f));
+
+        _onlineLightLayer = CreateOnlineBackgroundLayer(
+            _onlineBackgroundRoot.transform,
+            "OnlineForestLight",
+            CreateSoftBandSprite(new Color(0.90f, 0.82f, 0.42f, 0.18f), new Color(1f, 1f, 1f, 0f)),
+            new Color(1f, 1f, 1f, 0.34f),
+            new Vector2(2300f, 980f));
+
+        if (cardsContainer != null && cardsContainer.parent == canvas.transform)
+            _onlineBackgroundRoot.transform.SetSiblingIndex(Mathf.Max(0, cardsContainer.GetSiblingIndex()));
+        else
+            _onlineBackgroundRoot.transform.SetAsFirstSibling();
+    }
+
+    private RectTransform CreateOnlineBackgroundLayer(Transform parent, string objectName, Sprite sprite, Color color, Vector2 size)
+    {
+        GameObject layer = new GameObject(objectName, typeof(RectTransform), typeof(Image));
+        layer.transform.SetParent(parent, false);
+
+        RectTransform rect = layer.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0.5f, 0.5f);
+        rect.anchorMax = new Vector2(0.5f, 0.5f);
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.sizeDelta = size;
+        rect.anchoredPosition = Vector2.zero;
+
+        Image image = layer.GetComponent<Image>();
+        image.sprite = sprite;
+        image.type = Image.Type.Simple;
+        image.preserveAspect = false;
+        image.color = color;
+        image.raycastTarget = false;
+        return rect;
+    }
+
+    private Sprite CreateSoftBandSprite(Color bandColor, Color clearColor)
+    {
+        const int width = 256;
+        const int height = 128;
+        Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+        texture.name = "OnlineSoftBandTexture";
+        texture.wrapMode = TextureWrapMode.Repeat;
+        texture.filterMode = FilterMode.Bilinear;
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                float diagonal = Mathf.Repeat((x * 0.8f + y * 1.35f) / 96f, 1f);
+                float band = Mathf.Clamp01(1f - Mathf.Abs(diagonal - 0.5f) * 5.5f);
+                band *= band;
+                Color color = Color.Lerp(clearColor, bandColor, band);
+                texture.SetPixel(x, y, color);
+            }
+        }
+
+        texture.Apply();
+        return Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 100f);
+    }
+
+    private void AnimateOnlineBackground()
+    {
+        if (_onlineMistLayer != null)
+        {
+            float x = Mathf.Repeat(Time.time * 18f, 420f) - 210f;
+            float y = Mathf.Sin(Time.time * 0.35f) * 12f;
+            _onlineMistLayer.anchoredPosition = new Vector2(x, y);
+        }
+
+        if (_onlineLightLayer != null)
+        {
+            float x = 210f - Mathf.Repeat(Time.time * 28f, 420f);
+            float y = Mathf.Sin(Time.time * 0.48f + 1.2f) * 16f;
+            _onlineLightLayer.anchoredPosition = new Vector2(x, y);
+        }
+    }
+
+    private Sprite CreateOnlineForestSprite()
+    {
+        const int width = 512;
+        const int height = 288;
+        Texture2D texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+        texture.name = "OnlineForestBackgroundTexture";
+        texture.wrapMode = TextureWrapMode.Clamp;
+        texture.filterMode = FilterMode.Bilinear;
+
+        Color top = new Color(0.18f, 0.34f, 0.25f, 1f);
+        Color middle = new Color(0.30f, 0.58f, 0.34f, 1f);
+        Color bottom = new Color(0.12f, 0.38f, 0.35f, 1f);
+        Color river = new Color(0.16f, 0.46f, 0.48f, 1f);
+        Color light = new Color(0.67f, 0.78f, 0.48f, 1f);
+        Color shadow = new Color(0.08f, 0.22f, 0.16f, 1f);
+
+        for (int y = 0; y < height; y++)
+        {
+            float vertical = (float)y / (height - 1);
+            Color baseColor = vertical < 0.58f
+                ? Color.Lerp(bottom, middle, vertical / 0.58f)
+                : Color.Lerp(middle, top, (vertical - 0.58f) / 0.42f);
+
+            for (int x = 0; x < width; x++)
+            {
+                float horizontal = (float)x / (width - 1);
+                float riverMask = Mathf.Clamp01(1f - Mathf.Abs(vertical - (0.22f + Mathf.Sin(horizontal * Mathf.PI * 2f) * 0.035f)) * 7f);
+                Color color = Color.Lerp(baseColor, river, riverMask * 0.38f);
+
+                float vignette = Mathf.Clamp01(Mathf.Abs(horizontal - 0.5f) * 1.5f + Mathf.Abs(vertical - 0.48f) * 0.45f);
+                color = Color.Lerp(color, shadow, vignette * 0.22f);
+
+                if (y > height * 0.58f && ((x / 18) % 3 == 0 || (x / 27) % 5 == 0))
+                    color = Color.Lerp(color, shadow, 0.18f);
+
+                if (y > height * 0.72f && Mathf.Abs(Mathf.Sin((x + y) * 0.055f)) > 0.92f)
+                    color = Color.Lerp(color, light, 0.16f);
+
+                texture.SetPixel(x, y, color);
+            }
+        }
+
+        texture.Apply();
+        return Sprite.Create(texture, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), 100f);
+    }
+
+    private void EnsureOnlineInfoPanel()
+    {
+        if (_onlineInfoPanel != null)
+            return;
+
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas == null)
+            return;
+
+        Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        _onlineInfoPanel = new GameObject("OnlineRoomInfoPanel", typeof(RectTransform), typeof(Image));
+        _onlineInfoPanel.transform.SetParent(canvas.transform, false);
+        _onlineInfoPanel.transform.SetAsLastSibling();
+
+        RectTransform rect = _onlineInfoPanel.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0f, 1f);
+        rect.anchorMax = new Vector2(0f, 1f);
+        rect.pivot = new Vector2(0f, 1f);
+        rect.anchoredPosition = new Vector2(24f, -24f);
+        rect.sizeDelta = new Vector2(330f, 124f);
+
+        Image panelImage = _onlineInfoPanel.GetComponent<Image>();
+        panelImage.color = new Color(0.95f, 0.90f, 0.78f, 0.96f);
+        panelImage.raycastTarget = false;
+
+        Outline outline = _onlineInfoPanel.AddComponent<Outline>();
+        outline.effectColor = new Color(0.66f, 0.28f, 0.15f, 0.85f);
+        outline.effectDistance = new Vector2(4f, -4f);
+
+        Color titleColor = new Color(0.48f, 0.18f, 0.13f);
+        Color bodyColor = new Color(0.39f, 0.20f, 0.13f);
+
+        _onlineRoomText = CreateOverlayText(_onlineInfoPanel.transform, "RoomLabel", font, 17, FontStyle.Bold, new Vector2(-4f, 38f), new Vector2(278f, 24f), TextAnchor.MiddleCenter, titleColor);
+        _onlinePasswordText = CreateOverlayText(_onlineInfoPanel.transform, "PasswordLabel", font, 22, FontStyle.Bold, new Vector2(-4f, 10f), new Vector2(278f, 28f), TextAnchor.MiddleCenter, titleColor);
+        _onlinePlayerText = CreateOverlayText(_onlineInfoPanel.transform, "PlayerLabel", font, 18, FontStyle.Bold, new Vector2(-4f, -19f), new Vector2(278f, 24f), TextAnchor.MiddleCenter, bodyColor);
+        _onlineTurnText = CreateOverlayText(_onlineInfoPanel.transform, "TurnLabel", font, 18, FontStyle.Bold, new Vector2(-4f, -47f), new Vector2(278f, 24f), TextAnchor.MiddleCenter, bodyColor);
+        _onlineStatusText = CreateOverlayText(_onlineInfoPanel.transform, "StatusLabel", font, 13, FontStyle.Normal, new Vector2(-4f, -61f), new Vector2(278f, 16f), TextAnchor.MiddleCenter, new Color(0.45f, 0.28f, 0.18f));
+        _onlineStatusText.gameObject.SetActive(false);
+    }
+
+    private void UpdateOnlineInfoPanel(string statusMessage, int localPlayerSlot, int currentTurnSlot, bool waitingForOpponent, bool previewRunning, bool gameOver)
+    {
+        EnsureOnlineInfoPanel();
+        if (_onlineInfoPanel == null)
+            return;
+
+        string roomCode = string.IsNullOrEmpty(GameLaunchConfig.RoomCode) ? "----" : GameLaunchConfig.RoomCode;
+        string playerText = localPlayerSlot >= 0 ? "Jogador " + (localPlayerSlot + 1) : "Conectando";
+        string turnText = waitingForOpponent ? "Aguardando oponente" :
+            gameOver ? "Partida encerrada" :
+            previewRunning ? "Memorize as cartas" :
+            currentTurnSlot == localPlayerSlot ? "Sua vez" : "Vez do oponente";
+
+        if (_onlineRoomText != null)
+            _onlineRoomText.text = "Sala online";
+
+        if (_onlinePasswordText != null)
+            _onlinePasswordText.text = "Senha: " + roomCode;
+
+        if (_onlinePlayerText != null)
+            _onlinePlayerText.text = playerText;
+
+        if (_onlineTurnText != null)
+            _onlineTurnText.text = "Vez: " + turnText;
+
+        if (_onlineStatusText != null)
+            _onlineStatusText.text = string.IsNullOrEmpty(statusMessage) ? "Multiplayer ativo" : statusMessage;
+    }
+
+    private void EnsureOnlineIntroOverlay()
+    {
+        if (_onlineIntroOverlay != null)
+            return;
+
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas == null)
+            return;
+
+        Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        _onlineIntroOverlay = new GameObject("OnlineIntroOverlay", typeof(RectTransform), typeof(Image));
+        _onlineIntroOverlay.transform.SetParent(canvas.transform, false);
+        _onlineIntroOverlay.transform.SetAsLastSibling();
+
+        RectTransform rect = _onlineIntroOverlay.GetComponent<RectTransform>();
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+
+        Image image = _onlineIntroOverlay.GetComponent<Image>();
+        image.color = new Color(0.06f, 0.14f, 0.10f, 0.42f);
+        image.raycastTarget = false;
+
+        _onlineIntroText = CreateOverlayText(
+            _onlineIntroOverlay.transform,
+            "OnlineIntroText",
+            font,
+            54,
+            FontStyle.Bold,
+            Vector2.zero,
+            new Vector2(720f, 150f),
+            TextAnchor.MiddleCenter,
+            new Color(0.98f, 0.90f, 0.66f));
+
+        Outline outline = _onlineIntroText.gameObject.AddComponent<Outline>();
+        outline.effectColor = new Color(0.39f, 0.16f, 0.10f, 0.95f);
+        outline.effectDistance = new Vector2(4f, -4f);
+
+        _onlineIntroOverlay.SetActive(false);
+    }
+
+    private void TryStartOnlineIntro(string statusMessage, bool waitingForOpponent, bool previewRunning, bool gameOver)
+    {
+        if (_onlineIntroShown || _onlineIntroRunning || waitingForOpponent || !previewRunning || gameOver)
+            return;
+
+        if (string.IsNullOrEmpty(statusMessage))
+            return;
+
+        string normalized = statusMessage.ToLowerInvariant();
+        if (!normalized.Contains("partida iniciada"))
+            return;
+
+        if (Time.realtimeSinceStartup - _lastOnlineIntroStartRealtime < 6f)
+            return;
+
+        _lastOnlineIntroStartRealtime = Time.realtimeSinceStartup;
+        _onlineIntroShown = true;
+        _onlineIntroRoutine = StartCoroutine(PlayOnlineIntroCountdown());
+    }
+
+    private IEnumerator PlayOnlineIntroCountdown()
+    {
+        EnsureOnlineIntroOverlay();
+        if (_onlineIntroOverlay == null || _onlineIntroText == null)
+            yield break;
+
+        _onlineIntroRunning = true;
+        Card.DO_NOT = true;
+        _onlineIntroOverlay.SetActive(true);
+
+        yield return ShowOnlineIntroStep("Partida iniciada", 0.34f, 54, GetIntroPartidaClip());
+        yield return ShowOnlineIntroStep("1", 0.16f, 86, GetIntroUmClip());
+        yield return ShowOnlineIntroStep("2", 0.16f, 86, GetIntroDoisClip());
+        yield return ShowOnlineIntroStep("3", 0.16f, 86, GetIntroTresClip());
+        yield return ShowOnlineIntroStep("Vai!", 0.18f, 78, GetIntroVaiClip());
+
+        _onlineIntroOverlay.SetActive(false);
+        _onlineIntroRunning = false;
+        Card.DO_NOT = !_lastOnlineCanPlay;
+        _onlineIntroRoutine = null;
+    }
+
+    private AudioClip GetIntroPartidaClip()
+    {
+        if (_introPartidaClip == null)
+            _introPartidaClip = Resources.Load<AudioClip>("Audio/intro_partida_iniciada");
+
+        return _introPartidaClip;
+    }
+
+    private AudioClip GetIntroUmClip()
+    {
+        if (_introUmClip == null)
+            _introUmClip = Resources.Load<AudioClip>("Audio/intro_um");
+
+        return _introUmClip;
+    }
+
+    private AudioClip GetIntroDoisClip()
+    {
+        if (_introDoisClip == null)
+            _introDoisClip = Resources.Load<AudioClip>("Audio/intro_dois");
+
+        return _introDoisClip;
+    }
+
+    private AudioClip GetIntroTresClip()
+    {
+        if (_introTresClip == null)
+            _introTresClip = Resources.Load<AudioClip>("Audio/intro_tres");
+
+        return _introTresClip;
+    }
+
+    private AudioClip GetIntroVaiClip()
+    {
+        if (_introVaiClip == null)
+            _introVaiClip = Resources.Load<AudioClip>("Audio/intro_vai");
+
+        return _introVaiClip;
+    }
+
+    private IEnumerator ShowOnlineIntroStep(string message, float seconds, int fontSize, AudioClip voiceClip)
+    {
+        _onlineIntroText.text = message;
+        _onlineIntroText.fontSize = fontSize;
+        _onlineIntroText.color = new Color(0.98f, 0.90f, 0.66f, 1f);
+        _onlineIntroText.rectTransform.localScale = Vector3.one * 0.88f;
+
+        if (voiceSource != null && voiceClip != null)
+        {
+            voiceSource.Stop();
+            voiceSource.clip = voiceClip;
+            voiceSource.Play();
+            float playbackLength = voiceSource.pitch > 0f ? voiceClip.length / voiceSource.pitch : voiceClip.length;
+            seconds = Mathf.Max(seconds, playbackLength + 0.01f);
+        }
+
+        float elapsed = 0f;
+        while (elapsed < seconds)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / seconds);
+            float scale = Mathf.Lerp(0.88f, 1.08f, Mathf.Sin(t * Mathf.PI));
+            _onlineIntroText.rectTransform.localScale = Vector3.one * scale;
+
+            Color color = _onlineIntroText.color;
+            color.a = Mathf.Lerp(1f, 0.15f, Mathf.Max(0f, (t - 0.72f) / 0.28f));
+            _onlineIntroText.color = color;
+            yield return null;
+        }
     }
 
     private void EnsureOnlineHud()
@@ -1213,6 +1798,29 @@ public class GameManager : MonoBehaviour
         ShowScorePopup(message, localPlayerSlot == lastScoreEventSlot
             ? new Color(0.56f, 0.71f, 0.42f)
             : new Color(0.75f, 0.38f, 0.30f));
+    }
+
+    private void HandleOnlineAudioFeedback(string statusMessage, int scorePlayerOne, int scorePlayerTwo, int currentTurnSlot, bool previewRunning, bool gameOver)
+    {
+        if (audioSource == null || string.IsNullOrEmpty(statusMessage) || previewRunning || gameOver)
+            return;
+
+        string normalized = statusMessage.ToLowerInvariant();
+        bool isSuccess = normalized.Contains("par encontrado");
+        bool isError = normalized.Contains("nao formou par") || normalized.Contains("não formou par");
+
+        if (!isSuccess && !isError)
+            return;
+
+        string signature = scorePlayerOne + ":" + scorePlayerTwo + ":" + currentTurnSlot + ":" + statusMessage;
+        if (_lastOnlineAudioFeedbackSignature == signature)
+            return;
+
+        _lastOnlineAudioFeedbackSignature = signature;
+
+        AudioClip clip = isSuccess ? successSound : errorSound;
+        if (clip != null)
+            audioSource.PlayOneShot(clip, 0.45f);
     }
 
     private void ShowScorePopup(string message, Color color)
