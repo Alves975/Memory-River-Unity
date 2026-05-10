@@ -164,11 +164,8 @@ public class Card : MonoBehaviour
         if (delay > 0f)
             yield return new WaitForSeconds(delay);
 
-<<<<<<< HEAD
-=======
         if (this == null || gameObject == null) yield break;
 
->>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
         _isAnimating = true;
         float elapsed = 0f;
         Vector3 startScale = new Vector3(appearStartScale, appearStartScale, 1f);
@@ -176,23 +173,17 @@ public class Card : MonoBehaviour
 
         while (elapsed < appearDuration)
         {
-<<<<<<< HEAD
             elapsed += Time.deltaTime;
-            float progress = Mathf.Clamp01(elapsed / appearDuration);
-            float eased = EaseOutBack(progress);
-            transform.localScale = Vector3.LerpUnclamped(startScale, endScale, eased);
-            SetAlpha(progress);
-=======
-            if (this == null || gameObject == null) yield break;
 
-            elapsed += Time.deltaTime;
             float progress = Mathf.Clamp01(elapsed / appearDuration);
             float eased = EaseOutBack(progress);
 
             transform.localScale = Vector3.LerpUnclamped(startScale, endScale, eased);
             SetAlpha(progress);
 
->>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
+            if (this == null || gameObject == null)
+                yield break;
+
             yield return null;
         }
 
@@ -255,17 +246,10 @@ public class Card : MonoBehaviour
 
     IEnumerator pause()
     {
-<<<<<<< HEAD
+
         yield return new WaitForSeconds(1f);
         _state = 0;
         yield return StartCoroutine(AnimateFlip(_cardBack));
-=======
-        yield return new WaitForSeconds(1);
-        if (_state == 0)
-            ShowBack();
-        else if (_state == 1)
-            ShowFront();
->>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
         DO_NOT = false;
     }
 
@@ -425,12 +409,9 @@ public class Card : MonoBehaviour
         float p = t - 1f;
         return 1f + c3 * p * p * p + c1 * p * p;
     }
-<<<<<<< HEAD
-=======
 
      private void OnDisable()
     {
         StopAllCoroutines();
     }
->>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 }

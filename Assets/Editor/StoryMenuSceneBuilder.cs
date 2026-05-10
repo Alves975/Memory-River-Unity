@@ -131,11 +131,7 @@ public static class StoryMenuSceneBuilder
 
         Button startButton = CreateButton(leftPanel.transform, "Jogar Capitulo 1", "Entrar na campanha");
         SetRect(startButton.GetComponent<RectTransform>(), new Vector2(60f, -458f), new Vector2(560f, 112f));
-<<<<<<< HEAD
         UnityEventTools.AddPersistentListener(startButton.onClick, controller.StartSelectedPhase);
-=======
-        UnityEventTools.AddPersistentListener(startButton.onClick, controller.StartChapterOne);
->>>>>>> c42ab4f55a7d5622566b6b5a989db3c4fcd647eb
 
         Button backButton = CreateButton(leftPanel.transform, "Voltar", "Retornar ao menu principal");
         SetRect(backButton.GetComponent<RectTransform>(), new Vector2(60f, -592f), new Vector2(360f, 96f));
