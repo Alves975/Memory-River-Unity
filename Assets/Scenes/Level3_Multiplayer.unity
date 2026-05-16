@@ -231,8 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 8
+  _state: 1
+  _cardValue: 6
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 266e4c3e10bdb464daa1e84bb1444e59, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -769,8 +769,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 2
+  _state: 1
+  _cardValue: 6
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -867,7 +867,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 266e4c3e10bdb464daa1e84bb1444e59, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1012,8 +1012,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 4
+  _state: 1
+  _cardValue: 1
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fdc38873c03e6a9458e721a11eed21dc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1259,8 +1259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 7
+  _state: 1
+  _cardValue: 8
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84adf368f2810504193ec7b5c1a8ead9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
+  _state: 1
   _cardValue: 3
   _initialized: 1
   _matched: 0
@@ -1556,7 +1556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 819def0f86b9b524a9ac4cd496338e5c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1626,8 +1626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 6
+  _state: 1
+  _cardValue: 2
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -1724,7 +1724,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a71d8d87e4456545bab6e116d29d044, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2003,8 +2003,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 4
+  _state: 1
+  _cardValue: 7
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -2101,7 +2101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1aed61c48576d254eaa2f2ece6d6b928, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2171,8 +2171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 6
+  _state: 1
+  _cardValue: 1
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -2269,7 +2269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fdc38873c03e6a9458e721a11eed21dc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2407,8 +2407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 7
+  _state: 1
+  _cardValue: 4
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -2505,7 +2505,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b45bbcaa082048145a1c4e398a538872, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2575,8 +2575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 1
+  _state: 1
+  _cardValue: 2
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -2673,7 +2673,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a71d8d87e4456545bab6e116d29d044, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2743,7 +2743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
+  _state: 1
   _cardValue: 8
   _initialized: 1
   _matched: 0
@@ -2841,7 +2841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84adf368f2810504193ec7b5c1a8ead9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3027,8 +3027,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 2
+  _state: 1
+  _cardValue: 5
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -3125,7 +3125,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0ca8aa5adb919c746821e14b6141e988, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3195,8 +3195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 5
+  _state: 1
+  _cardValue: 4
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -3293,7 +3293,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b45bbcaa082048145a1c4e398a538872, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3438,8 +3438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 5
+  _state: 1
+  _cardValue: 3
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -3536,7 +3536,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 819def0f86b9b524a9ac4cd496338e5c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3606,8 +3606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 1
+  _state: 1
+  _cardValue: 7
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -3704,7 +3704,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1aed61c48576d254eaa2f2ece6d6b928, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3774,8 +3774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1459087cac1bf4b92c9b16c9684737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  _cardValue: 3
+  _state: 1
+  _cardValue: 5
   _initialized: 1
   _matched: 0
   flipDuration: 0.18
@@ -3872,7 +3872,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 247e17e6b3a12014b8277542ac598eeb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0ca8aa5adb919c746821e14b6141e988, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4011,6 +4011,7 @@ GameObject:
   - component: {fileID: 1730462935}
   - component: {fileID: 1730462936}
   - component: {fileID: 1730462937}
+  - component: {fileID: 1730462938}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Manager
@@ -4077,6 +4078,7 @@ MonoBehaviour:
   successSound: {fileID: 8300000, guid: 605148639a98657468847a5caf1b8b76, type: 3}
   errorSound: {fileID: 8300000, guid: af85a2e67ebf1054a99594b0b68f3d3d, type: 3}
   backgroundMusic: {fileID: 8300000, guid: 14e9385f6fad42b41ba9cb949f804649, type: 3}
+  dialogo: {fileID: 0}
 --- !u!4 &1730462920
 Transform:
   m_ObjectHideFlags: 0
@@ -5639,6 +5641,102 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1730462938
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730462918}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 14e9385f6fad42b41ba9cb949f804649, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1

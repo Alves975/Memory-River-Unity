@@ -100,7 +100,6 @@ public static class StoryMenuSceneBuilder
         GameObject leftInset = CreatePanel("LeftInset", leftPanel.transform, new Color(1f, 1f, 1f, 0.06f));
         AnchorPanel(leftInset.GetComponent<RectTransform>(), new Vector2(0.08f, 0.08f), new Vector2(0.92f, 0.9f), Vector2.zero, Vector2.zero);
 
-        StoryMenuController controller = root.AddComponent<StoryMenuController>();
 
         Text title = CreateText("Title", leftPanel.transform, "MODO HISTORIA", 60, FontStyle.Bold, TextAnchor.UpperLeft);
         title.color = TextMain;
@@ -115,32 +114,28 @@ public static class StoryMenuSceneBuilder
         Text chapterTitle = CreateText("ChapterTitle", leftPanel.transform, "Capitulo 1", 42, FontStyle.Bold, TextAnchor.UpperLeft);
         chapterTitle.color = TextMain;
         SetRect(chapterTitle.rectTransform, new Vector2(60f, -210f), new Vector2(500f, 58f));
-        controller.chapterTitleText = chapterTitle;
 
         Text chapterDescription = CreateText("ChapterDescription", leftPanel.transform, "Memorize as cartas, limpe o tabuleiro e avance na campanha.", 24, FontStyle.Normal, TextAnchor.UpperLeft);
         chapterDescription.color = new Color(TextMain.r, TextMain.g, TextMain.b, 0.9f);
         chapterDescription.horizontalOverflow = HorizontalWrapMode.Wrap;
         chapterDescription.verticalOverflow = VerticalWrapMode.Truncate;
         SetRect(chapterDescription.rectTransform, new Vector2(60f, -278f), new Vector2(560f, 96f));
-        controller.chapterDescriptionText = chapterDescription;
+     
 
         Text progress = CreateText("Progress", leftPanel.transform, "Fluxo de historia separado do multiplayer.", 22, FontStyle.Italic, TextAnchor.MiddleLeft);
         progress.color = new Color(TextMain.r, TextMain.g, TextMain.b, 0.85f);
         SetRect(progress.rectTransform, new Vector2(60f, -392f), new Vector2(560f, 36f));
-        controller.progressText = progress;
 
         Button startButton = CreateButton(leftPanel.transform, "Jogar Capitulo 1", "Entrar na campanha");
         SetRect(startButton.GetComponent<RectTransform>(), new Vector2(60f, -458f), new Vector2(560f, 112f));
-        UnityEventTools.AddPersistentListener(startButton.onClick, controller.StartSelectedPhase);
 
         Button backButton = CreateButton(leftPanel.transform, "Voltar", "Retornar ao menu principal");
         SetRect(backButton.GetComponent<RectTransform>(), new Vector2(60f, -592f), new Vector2(360f, 96f));
-        UnityEventTools.AddPersistentListener(backButton.onClick, controller.BackToMainMenu);
 
         Text status = CreateText("Status", leftPanel.transform, "Comece pelo Capitulo 1.", 20, FontStyle.Normal, TextAnchor.MiddleLeft);
         status.color = new Color(TextMain.r, TextMain.g, TextMain.b, 0.85f);
         SetRect(status.rectTransform, new Vector2(60f, -715f), new Vector2(560f, 36f));
-        controller.statusText = status;
+        
 
         CreateStoryPreview(rightPanel.transform);
     }

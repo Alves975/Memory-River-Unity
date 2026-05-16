@@ -20,4 +20,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level3_Multiplayer.unity
     guid: 91a494eca5d569f46b12cf5b742b6e96
+  - enabled: 1
+    path: Assets/Scenes/Historia4.unity
+    guid: cb84cc40f65ba744698e86936c16c696
+  - enabled: 1
+    path: Assets/Scenes/Historia3.unity
+    guid: 7a5dda9a72f97ea4bab599d6278629e1
+  - enabled: 1
+    path: Assets/Scenes/Historia2.unity
+    guid: 6127561ea7fb9f242a56b718594a9011
+  - enabled: 1
+    path: Assets/Scenes/Historia1.unity
+    guid: 3a514ecf71e7cef45bf2dc4063535f2d
   m_configObjects: {}
